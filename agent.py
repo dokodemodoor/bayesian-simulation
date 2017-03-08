@@ -9,7 +9,6 @@ class Agent (object):
         self.bank = 0
         self.strat = 0
         self.passort = 0 
-        self.neighbors = []
         self.switchprob = 0
 
     def get_id (self):
