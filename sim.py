@@ -39,10 +39,10 @@ def main():
 
     plot_coop_prp(coop_prp)
 
-def neighbors (nodes, halfk):
+def neighbors (nodes, k):
     n = len(nodes)
     for i, player in enumerate(nodes):
-        for j in range(i+1, i+halfk+1):
+        for j in range(i+1, i+k+1):
             neigh = nodes[j % n]
             yield player, neigh 
 
@@ -64,7 +64,8 @@ def record (i, n, overall_strats, coop_prp, cur_strats):
 def calc_payoff (network):
     for player in network: 
           # Calculate payoffs
-        coop_neigh = sum(1 for neighbor in network[player] if neighbor.get_strat() == 1)
+        coop_neigh = sum(1 for neighbor in network[player] 
+                if neighbor.get_strat() == 1)
         cost = -COST * player.get_strat() * 2*K 
         benefit = coop_neigh * BENEFIT
         bank = cost + benefit 
@@ -78,8 +79,6 @@ def update (network, rnge):
     for player in network:
         coop = []
         defect = []
-        same = []
-        diff = []
 
         for neighbor in network[player]:
             if neighbor.get_strat() == 1: 
@@ -120,7 +119,8 @@ def update (network, rnge):
 
 def plot_coop_prp(coop_prp):
     plt.figure(facecolor="white")
-    plt.scatter(list(range(0, NTRIALS)), [x / NREP for x in coop_prp], color="#703fbf")
+    plt.scatter(list(range(0, NTRIALS)), 
+            [x / NREP for x in coop_prp], color="#703fbf")
     plt.ylim(0,1)
     plt.ylabel("Mean Cooperation Proportion")
     plt.xlabel("Round Number")
