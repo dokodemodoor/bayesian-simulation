@@ -10,6 +10,14 @@ class Agent (object):
         self.strat = 0
         self.passort = 0 
         self.switchprob = 0
+        
+        self.coop = np.random.normal(.5, .15)
+        while self.coop <= 0 or self.coop >= 1:
+            self.coop = np.random.normal(.6, .12)
+
+        self.bayes = np.random.normal(.5, .15)
+        while self.bayes <= 0 or self.bayes >= 1:
+            self.bayes = np.random.normal(.5, .15)
 
     def get_id (self):
         return self.ID
@@ -38,5 +46,16 @@ class Agent (object):
     def get_sp (self):
         return self.switchprob
 
+    def get_coop (self):
+        return self.coop
+
+    def set_coop (self, coop):
+        self.coop = coop
+
+    def get_bayes (self):
+        return self.bayes
+
+    def set_bayes (self, bayes):
+        self.bayes = bayes
 
 
